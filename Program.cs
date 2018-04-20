@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-
+using System.Threading;
 
 namespace MXSPyCOM
 {
@@ -33,7 +33,6 @@ namespace MXSPyCOM
 		/// Jeff Hanna, jeff.b.hanna@gmail.com, July 9, 2016 9:00:00 AM
 
 		const string USAGE_INFO = "\nType \"MXSPyCOM\" for usage info.";
-
 
 		static void execute_max_commands(string[] args, string filepath)
 		{
@@ -94,6 +93,15 @@ namespace MXSPyCOM
 								break;
 
 							case "-s":
+
+								try
+								{
+									com_obj.execute("clearListener()");
+									
+								}
+								catch (System.Runtime.InteropServices.COMException) { }
+
+								Thread.Sleep(100);
 
 								try
 								{
